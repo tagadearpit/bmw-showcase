@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useCallback, useState } from 'react'
 import Navbar from './components/Navbar.jsx'
 import Hero from './components/Hero.jsx'
 import FeaturedCars from './components/FeaturedCars.jsx'
@@ -11,12 +11,18 @@ import TestDriveForm from './components/TestDriveForm.jsx'
 import Footer from './components/Footer.jsx'
 import CarDetailsModal from './components/CarDetailsModal.jsx'
 import StudioBackground from './components/StudioBackground.jsx'
+import IntroSequence from './components/IntroSequence.jsx'
 import { cars } from './data/cars.js'
 
 export default function App() {
+  const [showIntro, setShowIntro] = useState(true)
   const [selectedCar, setSelectedCar] = useState(null)
   const [configCar, setConfigCar] = useState(cars[3] ?? cars[0])
   const [preferredModel, setPreferredModel] = useState(cars[0].name)
+
+  const completeIntro = useCallback(() => {
+    setShowIntro(false)
+  }, [])
 
   const openDetails = (car) => setSelectedCar(car)
   const closeDetails = () => setSelectedCar(null)
@@ -24,6 +30,7 @@ export default function App() {
   const configureCar = (car) => {
     setConfigCar(car)
     closeDetails()
+
     requestAnimationFrame(() => {
       document.getElementById('configure')?.scrollIntoView({ behavior: 'smooth' })
     })
@@ -32,6 +39,7 @@ export default function App() {
   const testDriveCar = (car) => {
     closeDetails()
     setPreferredModel(car.name)
+
     requestAnimationFrame(() => {
       document.getElementById('test-drive')?.scrollIntoView({ behavior: 'smooth' })
     })
@@ -39,8 +47,11 @@ export default function App() {
 
   return (
     <>
+      {showIntro && <IntroSequence onComplete={completeIntro} />}
+
       <StudioBackground />
       <Navbar />
+
       <main>
         <Hero />
         <FeaturedCars onDetails={openDetails} />
@@ -51,8 +62,15 @@ export default function App() {
         <ModelComparison onDetails={openDetails} />
         <TestDriveForm preferredModel={preferredModel} />
       </main>
+
       <Footer />
-      <CarDetailsModal car={selectedCar} onClose={closeDetails} onConfigure={configureCar} onTestDrive={testDriveCar} />
+
+      <CarDetailsModal
+        car={selectedCar}
+        onClose={closeDetails}
+        onConfigure={configureCar}
+        onTestDrive={testDriveCar}
+      />
     </>
   )
 }
