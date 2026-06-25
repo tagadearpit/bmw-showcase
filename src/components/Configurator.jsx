@@ -38,6 +38,7 @@ export default function Configurator({ selectedCar, onSelectCar }) {
 
   useEffect(() => {
     if (!selectedCar) return
+
     setCarId(selectedCar.id)
     setExterior(selectedCar.colors[0])
     setWheel(selectedCar.wheels[0])
@@ -46,6 +47,7 @@ export default function Configurator({ selectedCar, onSelectCar }) {
 
   const chooseCar = (id) => {
     const next = cars.find((item) => item.id === id) ?? cars[0]
+
     setCarId(next.id)
     setExterior(next.colors[0])
     setWheel(next.wheels[0])
@@ -56,7 +58,9 @@ export default function Configurator({ selectedCar, onSelectCar }) {
   const previewColor = colorMap[exterior] ?? car.color
 
   return (
-    <section id="configure" className="px-4 py-24 md:px-8">
+    <section id="configure" className="relative overflow-hidden px-4 py-24 md:px-8">
+      <div className="absolute inset-x-0 top-24 mx-auto h-80 max-w-5xl rounded-full bg-blue-500/10 blur-3xl" />
+
       <div className="mx-auto max-w-7xl">
         <SectionHeader
           eyebrow="Configure your drive"
@@ -65,16 +69,30 @@ export default function Configurator({ selectedCar, onSelectCar }) {
         />
 
         <div className="grid gap-6 lg:grid-cols-[1.14fr_0.86fr]">
-          <div className="relative overflow-hidden rounded-[2.7rem] border border-white/10 bg-white/[0.045] p-3 shadow-panel backdrop-blur-2xl">
+          <motion.div
+            initial={{ opacity: 0, y: 36, scale: 0.98 }}
+            whileInView={{ opacity: 1, y: 0, scale: 1 }}
+            viewport={{ once: true, margin: '-100px' }}
+            transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+            className="video-frame-edge relative overflow-hidden rounded-[2.7rem] border border-white/10 bg-white/[0.045] p-3 shadow-panel backdrop-blur-2xl"
+          >
+            <div
+              className="absolute -inset-28 opacity-50 blur-3xl transition duration-500"
+              style={{
+                background: `radial-gradient(circle at 50% 50%, ${previewColor}55, transparent 55%)`
+              }}
+            />
+
             <RenderVideo
               src="/media/render/configurator-loop.mp4"
               title="BMW i4 configurator render loop"
               overlay="card"
               className="aspect-[16/11] rounded-[2.3rem] lg:aspect-auto lg:min-h-[660px]"
+              videoClassName="motion-safe:animate-kenburns-subtle"
             >
               <div className="flex h-full flex-col justify-between p-5 md:p-8">
                 <div className="flex flex-wrap items-center gap-3">
-                  <span className="rounded-full border border-white/15 bg-black/40 px-4 py-2 text-xs font-semibold uppercase tracking-[0.25em] text-sky-200 backdrop-blur-xl">
+                  <span className="light-sweep rounded-full border border-white/15 bg-black/40 px-4 py-2 text-xs font-semibold uppercase tracking-[0.25em] text-sky-200 backdrop-blur-xl">
                     Live render preview
                   </span>
                   <span className="rounded-full border border-white/15 bg-white/10 px-4 py-2 text-xs text-zinc-200 backdrop-blur-xl">
@@ -85,14 +103,20 @@ export default function Configurator({ selectedCar, onSelectCar }) {
                 <AnimatePresence mode="wait">
                   <motion.div
                     key={`${car.id}-${exterior}-${wheel}-${interior}`}
-                    initial={{ opacity: 0, y: 18 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -14 }}
-                    transition={{ duration: 0.35 }}
-                    className="max-w-2xl rounded-[1.8rem] border border-white/10 bg-black/45 p-5 backdrop-blur-2xl"
+                    initial={{ opacity: 0, y: 22, scale: 0.98 }}
+                    animate={{ opacity: 1, y: 0, scale: 1 }}
+                    exit={{ opacity: 0, y: -14, scale: 0.98 }}
+                    transition={{ duration: 0.38, ease: [0.22, 1, 0.36, 1] }}
+                    className="max-w-2xl rounded-[1.8rem] border border-white/10 bg-black/48 p-5 backdrop-blur-2xl"
                   >
-                    <p className="text-xs font-semibold uppercase tracking-[0.3em] text-sky-300">Current configuration</p>
-                    <h3 className="mt-3 font-display text-3xl font-semibold tracking-[-0.04em] text-white md:text-5xl">{car.name}</h3>
+                    <p className="text-xs font-semibold uppercase tracking-[0.3em] text-sky-300">
+                      Current configuration
+                    </p>
+
+                    <h3 className="mt-3 font-display text-3xl font-semibold tracking-[-0.04em] text-white md:text-5xl">
+                      {car.name}
+                    </h3>
+
                     <div className="mt-5 grid gap-3 text-sm text-zinc-300 sm:grid-cols-3">
                       <Summary label="Exterior" value={exterior} swatch={previewColor} />
                       <Summary label="Wheels" value={wheel} />
@@ -102,7 +126,7 @@ export default function Configurator({ selectedCar, onSelectCar }) {
                 </AnimatePresence>
               </div>
             </RenderVideo>
-          </div>
+          </motion.div>
 
           <div className="space-y-4">
             <OptionGroup title="Model">
@@ -116,7 +140,10 @@ export default function Configurator({ selectedCar, onSelectCar }) {
             <OptionGroup title="Exterior color">
               {car.colors.map((item) => (
                 <ChoiceButton key={item} active={item === exterior} onClick={() => setExterior(item)}>
-                  <span className="inline-block h-3 w-3 rounded-full border border-white/30" style={{ background: colorMap[item] ?? car.color }} />
+                  <span
+                    className="inline-block h-3 w-3 rounded-full border border-white/30"
+                    style={{ background: colorMap[item] ?? car.color }}
+                  />
                   {item}
                 </ChoiceButton>
               ))}
@@ -146,10 +173,17 @@ export default function Configurator({ selectedCar, onSelectCar }) {
 
 function OptionGroup({ title, children }) {
   return (
-    <div className="rounded-[1.7rem] border border-white/10 bg-white/[0.045] p-5 shadow-panel backdrop-blur-2xl">
-      <h3 className="mb-4 text-sm font-semibold uppercase tracking-[0.25em] text-zinc-400">{title}</h3>
+    <motion.div
+      initial={{ opacity: 0, y: 18 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      className="premium-card-hover rounded-[1.7rem] border border-white/10 bg-white/[0.045] p-5 shadow-panel backdrop-blur-2xl"
+    >
+      <h3 className="mb-4 text-sm font-semibold uppercase tracking-[0.25em] text-zinc-400">
+        {title}
+      </h3>
       <div className="flex flex-wrap gap-2">{children}</div>
-    </div>
+    </motion.div>
   )
 }
 
@@ -159,7 +193,9 @@ function ChoiceButton({ active, onClick, children }) {
       type="button"
       onClick={onClick}
       className={`inline-flex min-h-11 items-center gap-2 rounded-full border px-4 py-2 text-sm transition focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-300 ${
-        active ? 'border-white bg-white text-black' : 'border-white/10 bg-black/20 text-zinc-300 hover:bg-white/10 hover:text-white'
+        active
+          ? 'border-white bg-white text-black shadow-[0_0_35px_rgba(255,255,255,0.18)]'
+          : 'border-white/10 bg-black/20 text-zinc-300 hover:bg-white/10 hover:text-white'
       }`}
     >
       {children}
@@ -172,7 +208,12 @@ function Summary({ label, value, swatch }) {
     <div className="rounded-2xl border border-white/10 bg-white/[0.06] p-3">
       <p className="text-[10px] uppercase tracking-[0.22em] text-zinc-500">{label}</p>
       <p className="mt-1 flex items-center gap-2 font-medium text-white">
-        {swatch && <span className="h-3 w-3 rounded-full border border-white/30" style={{ background: swatch }} />}
+        {swatch && (
+          <span
+            className="h-3 w-3 rounded-full border border-white/30 shadow-[0_0_20px_currentColor]"
+            style={{ background: swatch }}
+          />
+        )}
         {value}
       </p>
     </div>
