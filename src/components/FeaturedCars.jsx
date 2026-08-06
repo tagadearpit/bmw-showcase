@@ -17,9 +17,9 @@ export default function FeaturedCars({ onDetails }) {
     <section id="models" className="px-4 py-24 md:px-8">
       <div className="mx-auto max-w-7xl">
         <SectionHeader
-          eyebrow="BMW model range"
+          eyebrow="Model Range"
           title="Each model has a different role in the story."
-          description="Filter the lineup by character. The cinematic sections use rendered video; the cards stay lightweight for fast browsing and clean mobile performance."
+          description="Filter the lineup by character. Cinematic sections use rendered video while the cards stay lightweight for fast browsing and clean mobile performance."
         />
         <ModelFilters activeFilter={filter} onChange={setFilter} />
         <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
