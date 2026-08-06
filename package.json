@@ -1,10 +1,12 @@
 {
-  "name": "bmw-future-showcase",
+  "name": "bmw-showcase",
   "private": true,
   "version": "1.0.0",
   "type": "module",
+  "description": "BMW-inspired cinematic automotive showcase built with React, Vite, Tailwind and Framer Motion",
+  "keywords": ["bmw", "automotive", "react", "vite", "framer-motion", "showcase"],
   "engines": {
-    "node": "24.x"
+    "node": ">=18"
   },
   "scripts": {
     "dev": "vite",
