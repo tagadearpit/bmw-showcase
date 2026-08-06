@@ -12,9 +12,9 @@ export default function PerformanceStats() {
     <section id="performance" className="px-4 py-24 md:px-8">
       <div className="mx-auto max-w-7xl">
         <SectionHeader
-          eyebrow="Measured emotion"
+          eyebrow="Measured Emotion"
           title="Numbers that support the experience."
-          description="Performance is presented with minimal hierarchy: large, readable, and restrained."
+          description="Performance is presented with minimal hierarchy — large, readable, and restrained."
         />
         <div ref={ref} className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
           {stats.map((stat, index) => (
@@ -28,14 +28,16 @@ export default function PerformanceStats() {
 
 function StatCard({ stat, inView, index }) {
   const value = useCountUp(stat.value, inView)
-  const display = stat.decimals ? value.toFixed(stat.decimals) : Math.round(value).toLocaleString('en-IN')
+  const display = stat.decimals
+    ? value.toFixed(stat.decimals)
+    : Math.round(value).toLocaleString('en-IN')
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 22 }}
+      initial={{ opacity: 0, y: 24 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
-      transition={{ duration: 0.55, delay: index * 0.08 }}
+      transition={{ duration: 0.6, delay: index * 0.07 }}
       className="relative overflow-hidden rounded-[2rem] border border-white/10 bg-white/[0.045] p-7 shadow-panel backdrop-blur-2xl"
     >
       <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-sky-300/70 to-transparent" />
@@ -43,7 +45,9 @@ function StatCard({ stat, inView, index }) {
         {display}
         <span className="text-2xl text-sky-200">{stat.suffix}</span>
       </p>
-      <p className="mt-5 text-xs font-semibold uppercase tracking-[0.28em] text-zinc-500">{stat.label}</p>
+      <p className="mt-5 text-xs font-semibold uppercase tracking-[0.28em] text-zinc-500">
+        {stat.label}
+      </p>
     </motion.div>
   )
 }
