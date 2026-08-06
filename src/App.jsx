@@ -31,6 +31,7 @@ export default function App() {
     setConfigCar(car)
     closeDetails()
 
+    // Smooth scroll to configurator section
     requestAnimationFrame(() => {
       document.getElementById('configure')?.scrollIntoView({ behavior: 'smooth' })
     })
