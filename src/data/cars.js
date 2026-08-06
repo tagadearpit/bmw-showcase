@@ -1,3 +1,5 @@
+// Car data, filters, interior features and performance stats for Bavaria Concept
+
 export const modelFilters = ['All', 'Electric', 'Performance', 'SUV', 'Sedan', 'Coupé', 'Roadster']
 
 export const cars = [
@@ -19,7 +21,7 @@ export const cars = [
     features: ['Competition-tuned chassis', 'Carbon-inspired cabin package', 'Launch control experience', 'Performance telemetry surfaces'],
     colors: ['Portimao Blue', 'Frozen White', 'Black Sapphire', 'Brooklyn Grey'],
     wheels: ['Competition 19/20″', 'Carbon Twin 20″', 'Forged Track 19″'],
-    interiors: ['Black Carbon', 'Kyalami Orange', 'Silverstone Sport']
+    interiors: ['Black Carbon', 'Kyalami Orange', 'Silverstone Sport'],
   },
   {
     id: 'm8-competition',
@@ -39,7 +41,7 @@ export const cars = [
     features: ['Grand touring cabin', 'Carbon aero detailing', 'Adaptive M differential', 'Ceramic braking package'],
     colors: ['Frozen Graphite', 'Alpine White', 'Tanzanite Blue', 'Black Sapphire'],
     wheels: ['Forged Blade 20″', 'Carbon Star 21″', 'Track Split 20″'],
-    interiors: ['Black Merino', 'Silverstone Performance', 'Midnight Alcantara']
+    interiors: ['Black Merino', 'Silverstone Performance', 'Midnight Alcantara'],
   },
   {
     id: 'i7-xdrive60',
@@ -59,7 +61,7 @@ export const cars = [
     features: ['Executive lounge cabin', 'Adaptive air comfort', 'Panoramic theatre display', 'AI-assisted highway experience'],
     colors: ['Arctic Silver', 'Carbon Black', 'Imperial Blue', 'Frozen White'],
     wheels: ['Aero Monolith 21″', 'Chrome Orbit 22″', 'Shadowline 21″'],
-    interiors: ['Ivory Merino', 'Graphite Alcantara', 'Cognac Executive']
+    interiors: ['Ivory Merino', 'Graphite Alcantara', 'Cognac Executive'],
   },
   {
     id: 'i4-m50',
@@ -79,7 +81,7 @@ export const cars = [
     features: ['Sport boost feel', 'Fast-charge route planning', 'Curved panoramic display', 'Acoustic comfort glazing'],
     colors: ['Brooklyn Grey', 'Electric Blue', 'Pearl White', 'Obsidian Black'],
     wheels: ['Aero Matrix 20″', 'Shadow Turbine 21″', 'Blue Ring 20″'],
-    interiors: ['Mocha Comfort', 'Graphite Tech', 'Ivory Minimal']
+    interiors: ['Mocha Comfort', 'Graphite Tech', 'Ivory Minimal'],
   },
   {
     id: 'xm-label',
@@ -99,7 +101,7 @@ export const cars = [
     features: ['Hybrid performance character', 'Large-format luxury cabin', 'xDrive-inspired traction', 'Geometric exterior lighting'],
     colors: ['Mineral White', 'Deep Sea Blue', 'Oxide Grey', 'Carbon Black'],
     wheels: ['Executive Aero 22″', 'Terrain Luxe 21″', 'Chrome Multi 23″'],
-    interiors: ['Tartufo Merino', 'Ivory White', 'Black Extended Leather']
+    interiors: ['Tartufo Merino', 'Ivory White', 'Black Extended Leather'],
   },
   {
     id: 'z4-m40i',
@@ -119,8 +121,8 @@ export const cars = [
     features: ['Low centre of gravity', 'Soft-top roof system', 'Driver-focused cockpit', 'Variable sport steering'],
     colors: ['Glacier Silver', 'Portimao Blue', 'Crimson Red', 'Jet Black'],
     wheels: ['Roadster Twin 19″', 'Polished V-Spoke 20″', 'Black Orbit 19″'],
-    interiors: ['Black Vernasca', 'Cognac Sport', 'Oyster Contrast']
-  }
+    interiors: ['Black Vernasca', 'Cognac Sport', 'Oyster Contrast'],
+  },
 ]
 
 export const interiorFeatures = [
@@ -128,12 +130,12 @@ export const interiorFeatures = [
   'Curved digital cockpit with reduced-glare visual hierarchy',
   'Premium leather, metal, and glass surfaces with quiet reflections',
   'Intelligent driving assistant surfaces for route and comfort control',
-  'Immersive sound and acoustic glass for a calmer long-distance cabin'
+  'Immersive sound and acoustic glass for a calmer long-distance cabin',
 ]
 
 export const stats = [
   { label: '0–100 km/h', value: 3.1, suffix: 's', decimals: 1 },
   { label: 'Peak output', value: 617, suffix: ' hp', decimals: 0 },
   { label: 'Electric range', value: 625, suffix: ' km', decimals: 0 },
-  { label: 'Top speed', value: 305, suffix: ' km/h', decimals: 0 }
+  { label: 'Top speed', value: 305, suffix: ' km/h', decimals: 0 },
 ]
