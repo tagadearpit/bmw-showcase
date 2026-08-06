@@ -1,5 +1,9 @@
 import { useEffect, useState } from 'react'
 
+/**
+ * Tracks which section is currently most visible in the viewport.
+ * Useful for highlighting the active link in the navbar.
+ */
 export function useActiveSection(sectionIds) {
   const [activeSection, setActiveSection] = useState(sectionIds[0] ?? '')
 
@@ -12,9 +16,14 @@ export function useActiveSection(sectionIds) {
 
       const observer = new IntersectionObserver(
         ([entry]) => {
-          if (entry.isIntersecting) setActiveSection(id)
+          if (entry.isIntersecting) {
+            setActiveSection(id)
+          }
         },
-        { rootMargin: '-35% 0px -55% 0px', threshold: 0.01 }
+        {
+          rootMargin: '-35% 0px -55% 0px',
+          threshold: 0.02,
+        },
       )
 
       observer.observe(element)
